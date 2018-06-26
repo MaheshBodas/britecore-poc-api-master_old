@@ -1,2 +1,8 @@
-# britecore-poc-api-master
-BriteCorePoc allows user to create / view various RiskType and RiskInstances based on that. Project uses DJango REST Framework, Vue JS and Element UI
+# REST framework pocserver
+# BriteCore PoC Server
+
+Source code for the [BriteCore PoC Server][server].
+
+[server]: https://github.com/MaheshBodas/BriteCorePOCAPI_old
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
