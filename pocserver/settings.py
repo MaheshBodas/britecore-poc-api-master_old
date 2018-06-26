@@ -39,15 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
-    'django.contrib.sites',    
+    # 'django.contrib.sites',    
     # Filtering related    
     'django_filters',
     # Filtering related
     'rest_framework.authtoken',
     'rest_auth',
-    'allauth',
-    'allauth.account',
-    'rest_auth.registration',
+    # 'allauth',
+    # 'allauth.account',
+    # 'rest_auth.registration',
     'rest_framework',
     'riskapi.apps.RiskApiConfig',
 ]
@@ -62,10 +62,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-REST_SESSION_LOGIN = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-SITE_ID = 1
 
 ROOT_URLCONF = 'pocserver.urls'
 
