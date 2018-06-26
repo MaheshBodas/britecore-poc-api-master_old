@@ -4,20 +4,6 @@ from riskapi.models import risktype,risktypefield,risk,riskfield
 from riskapi.utils import RiskFieldData
 from riskapi.validators import ValidationUtils
 
-# Serializer type for User DRF authentication
-class UserSerializer(serializers.ModelSerializer):    
-    class Meta:
-        model = User
-        fields = ('password', 'username', 'email','is_staff', 'is_superuser', 'is_active', 'date_joined',)
-        write_only_fields = ('password',)
-        read_only_fields = ('is_staff', 'is_superuser', 'is_active', 'date_joined',)
-        # Explicitly mark required fields
-        required_fields = (            
-            'username',            
-            'password'
-        )
-        extra_kwargs = {field: {'required': True} for field in required_fields}
-
 # Serializer type used for Lookups in select risktype list in UI
 class RiskTypeKeySerializer(serializers.ModelSerializer):
     class Meta:
@@ -242,3 +228,18 @@ class RiskSerializer(serializers.ModelSerializer):
             else:
                 print(strCombinedErrorMessage)
                 raise serializers.ValidationError(strCombinedErrorMessage)  
+
+# Serializer type for User DRF authentication
+class UserSerializer(serializers.ModelSerializer):   
+    user_risktypes = RiskTypeSerializer(many=True) 
+    class Meta:
+        model = User
+        fields = ('password', 'username', 'email','is_staff', 'is_superuser', 'is_active', 'date_joined', 'user_risktypes')
+        write_only_fields = ('password',)
+        read_only_fields = ('is_staff', 'is_superuser', 'is_active', 'date_joined',)
+        # Explicitly mark required fields
+        required_fields = (            
+            'username',            
+            'password'
+        )
+        extra_kwargs = {field: {'required': True} for field in required_fields}
