@@ -1,11 +1,26 @@
 #from riskapi.models import risktype,risk
 #from riskapi.serializers import RiskTypeSerializer,RiskSerializer
 from django.contrib.auth.models import User
-from .models import *
+from riskapi.models import risk,riskfield,risktype,risktypefield,Snippet
 from .serializers import *
 from rest_framework import generics
 from rest_framework import permissions
 from django_filters import rest_framework as filters
+
+class SnippetList(generics.ListCreateAPIView):
+    queryset = Snippet.objects.all()
+    # filter_backends = (filters.DjangoFilterBackend,)
+    # filter_fields = ('username', 'email', 'is_staff',)
+    serializer_class = SnippetSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+class SnippetDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Snippet.objects.all()
+    # filter_backends = (filters.DjangoFilterBackend,)
+    # filter_fields = ('username', 'email', 'is_staff',)
+    serializer_class = SnippetSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
 
 class UserList(generics.ListCreateAPIView):
     queryset = User.objects.all()

@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from riskapi.models import risktype,risktypefield,risk,riskfield
+from riskapi.models import risktype, risktypefield, risk, riskfield, Snippet
 from riskapi.utils import RiskFieldData
 from riskapi.validators import ValidationUtils
 
@@ -228,6 +228,16 @@ class RiskSerializer(serializers.ModelSerializer):
             else:
                 print(strCombinedErrorMessage)
                 raise serializers.ValidationError(strCombinedErrorMessage)  
+
+class SnippetSerializer(serializers.HyperlinkedModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    highlight = serializers.HyperlinkedIdentityField(
+        view_name='snippet-highlight', format='html')
+
+    class Meta:
+        model = Snippet
+        fields = ('url', 'id', 'highlight', 'owner', 'title', 'code',
+                'linenos', 'language', 'style')
 
 # Serializer type for User DRF authentication
 class UserSerializer(serializers.ModelSerializer):   
